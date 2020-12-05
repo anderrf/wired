@@ -35,6 +35,17 @@ body{
     color: #FFFFFF;
 }
 
+.landing-logo{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.landing-logo img{
+    width: 80%;
+}
+
 .landing-buttons{
     width: 100%;
 }
@@ -56,4 +67,46 @@ body{
 
 #btnSignup{
     border-radius: 0 0 1rem 0;
+}
+
+@media (min-width: 760px){
+    #page-landing{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas: "title title" "logo buttons";
+    }
+
+    .logo-slogan{
+        grid-area: title;
+        justify-content: flex-start;
+    }
+
+    .logo-slogan h1{
+        font-size: 10rem;
+    }
+
+    .logo-slogan p{
+        font-size: 4rem;
+    }
+
+    .landing-logo{
+        grid-area: logo;
+        justify-self: center;
+        width: 80%;
+    }
+
+    .landing-buttons{
+        grid-area: buttons;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .landing-buttons-double{
+        width: 100%;
+    }
+
+
 }
