@@ -1,0 +1,27 @@
+/*logon*/
+
+.logItem{
+    width: 100%;
+    font-size: 2rem;
+    font-family: 'Lato', sans-serif;
+    margin-top: 2rem;
+}
+
+.logItem label{
+    width: 100%;
+}
+
+.logItem > input{
+    width: 100%;
+    font-size: 2rem;
+    font-family: 'Lato', sans-serif;
+    border-radius: 0;
+    border: 0;
+    margin-top: 0.5rem;
+    height: 3rem;
+    transition: outline 0.5s;
+}
+
+.logItem > input:focus{
+    outline: #FFFF1A solid 1px;
+}

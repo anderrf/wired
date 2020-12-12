@@ -1,0 +1,26 @@
+@import url(../main.css);
+@import url(./buttons.css);
+@import url(./forms.css);
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#page-logon{
+    width: 90%;
+    background-color: #888888;
+    border-radius: 0.8rem;
+    overflow: hidden;
+    padding: 1rem;
+}
+
+#page-logon h1{
+    font-size: 4rem;
+    font-family: 'Electrolize', sans-serif;
+    text-align: center;
+    color: #FFFF1A;
+    border-bottom: #FFFFFF solid 1px;
+}
+
