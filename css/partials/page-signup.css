@@ -1,0 +1,38 @@
+@import url(../main.css);
+@import url(./buttons.css);
+@import url(./forms.css);
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#page-signup{
+    width: 90%;
+    background-color: #888888;
+    border-radius: 0.8rem;
+    overflow: hidden;
+    padding: 1rem;
+}
+
+#page-signup h1{
+    font-size: 4rem;
+    font-family: 'Electrolize', sans-serif;
+    text-align: center;
+    color: #FFFF1A;
+    border-bottom: #FFFFFF solid 1px;
+    padding-bottom: 1rem;
+}
+
+@media (min-width: 760px){
+    #page-signup{
+        width: 60%;
+        padding: 2rem;
+    }
+
+    #page-signup h1{
+        padding-bottom: 2rem;
+        margin-bottom: 2rem;
+    }
+}

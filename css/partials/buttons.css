@@ -61,6 +61,7 @@ a{
     transition: color 0.5s;
     border-radius: 0 1rem 0 1rem;
     border: none;
+    margin-top: 1rem;
 }
 
 .logItem button[type="submit"]:hover{
@@ -95,5 +96,6 @@ a{
     .logItem button[type="submit"]{
         width: 70%;
         position: middle;
+        margin-top: 2rem;
     }
 }
