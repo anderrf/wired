@@ -24,3 +24,14 @@ body{
     border-bottom: #FFFFFF solid 1px;
 }
 
+@media (min-width: 760px){
+    #page-logon{
+        width: 60%;
+        padding: 2rem;
+    }
+
+    #page-logon h1{
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+    }
+}

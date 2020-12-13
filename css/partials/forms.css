@@ -25,3 +25,11 @@
 .logItem > input:focus{
     outline: #FFFF1A solid 1px;
 }
+
+@media (min-width: 760px){
+    .logItem{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}

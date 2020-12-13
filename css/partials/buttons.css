@@ -91,4 +91,9 @@ a{
         font-size: 2.4rem;
         height: 4rem;
     }
+
+    .logItem button[type="submit"]{
+        width: 70%;
+        position: middle;
+    }
 }
