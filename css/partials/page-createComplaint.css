@@ -1,0 +1,67 @@
+@import url(../main.css);
+@import url(./buttons.css);
+@import url(./forms.css);
+
+#page-createComplaint{
+    background-color: #FFFFFF;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#page-createComplaint header{
+    width: 100%;
+    max-width: 100vw;
+    height: 10vh;
+    background-color: #333333;
+    display: grid;
+    grid-template-columns: 1fr 8fr;
+    align-items: center;
+}
+
+#page-createComplaint h2{
+    text-align: center;
+    font-size: 3rem;
+    margin-top: 2rem;
+    color: #FFFF1A;
+    font-family: 'Electrolize', sans-serif;
+}
+
+#page-createComplaint form{
+    width: 90%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.mapSet{
+    border-radius: 1rem 0;
+    overflow: hidden;
+    width: 100%;
+}
+
+#mapid{
+    background-color: #888888;
+    width: 100%;
+    height: 40vh;
+    border: #333333 solid 1px;
+}
+
+@media (min-width: 760px){
+    #page-createComplaint{
+        display: flex;
+        justify-content: center;
+    }
+
+    #page-createComplaint h2{
+        font-size: 6rem;
+    }
+
+    #page-createComplaint form{
+        width: 60%;
+    }
+}

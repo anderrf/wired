@@ -87,6 +87,56 @@ a{
     width: 100%;
 }
 
+/*upper*/
+.upperBackButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.upperBackButton img{
+    width: 100%;
+}
+
+/*complaint*/
+.complaintItem > button[type="submit"]{
+    width: 100%;
+    color: #333333;
+    background-color: #FFFF1A;
+    font-size: 2rem;
+    font-family: 'Lato', sans-serif;
+    border: none;
+    height: 4rem;
+    margin: 1rem auto;
+    transition: background 0.5s;
+}
+
+.complaintItem > button[type="submit"]:hover{
+    background-color: #888888;
+}
+
+.locationButtonDouble{
+    display: flex;
+    align-items: center;
+    background-color: #333333;
+}
+
+.locationButtonDouble button{
+    width: 100%;
+    border: #333333 solid 1px;
+    font-size: 2rem;
+    height: 5rem;
+    font-family: 'Lato', sans-serif;
+    color: #333333;
+    background-color: #FFFFFF;
+    transition: color 0.5s;
+}
+
+.locationButtonDouble button:hover{
+    color: #FFFF1A;
+}
+
 @media (min-width: 760px){
     .landing-button{
         font-size: 2.4rem;
@@ -97,5 +147,13 @@ a{
         width: 70%;
         position: middle;
         margin-top: 2rem;
+    }
+
+    .upperBackButton{
+        width: 8vh;
+    }
+
+    .upperBackButton img{
+        width: 8vh;
     }
 }

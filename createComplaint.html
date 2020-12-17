@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wired | Registro do problema</title>
+    <link rel="icon" href="./images/logo_128.png">
+    <link rel="stylesheet" href="./css/partials/page-createComplaint.css">
+</head>
+<body>
+    <div id="page-createComplaint">
+        <header>
+            <a href="./map.html" class="upperBackButton"><img src="./images/arrow_back.svg" alt="Voltar"></a>
+        </header>
+        <h2>Informe sobre o seu problema</h2>
+        <form action="" method="GET">
+            <div class="complaintItem">
+                <label for="complaintTitle">Qual o problema?</label>
+                <input id="complaintTitle" type="text" required maxlength="60">
+            </div>
+            <div class="complaintItem">
+                <label for="complaintDesc">Descrição adicional:</label>
+                <textarea name="complaintDesc" id="complaintDesc"></textarea>
+            </div>
+            <div class="complaintItem">
+                <div class="mapSet">
+                    <div id="mapid"></div>
+                    <div class="locationButtonDouble">
+                        <button type="button" id="btnGetMapLocation">Pegar localização do mapa</button>
+                        <button type="button" id="btnGetDeviceLocation">Pegar localização do dispositivo</button>
+                    </div>
+                </div>
+                <input type="hidden" name="lat" id="lat">
+                <input type="hidden" name="lng" id="lng">
+            </div>
+            <div class="complaintItem">
+                <button id="btnCreateComplaint" type="submit">Registrar problema</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

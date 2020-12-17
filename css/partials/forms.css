@@ -1,3 +1,7 @@
+textarea{
+    resize: vertical;
+}
+
 /*logon*/
 
 .logItem{
@@ -24,6 +28,31 @@
 
 .logItem > input:focus{
     outline: #FFFF1A solid 1px;
+}
+
+/*complaint*/
+.complaintItem{
+    width: 100%;
+    text-align: left;
+    margin: 1.3rem auto;
+}
+
+.complaintItem label{
+    width: 100%;
+    font-size: 2rem;
+    font-family: 'Lato', sans-serif;
+}
+
+.complaintItem input, .complaintItem textarea{
+    width: 100%;
+    font-size: 2rem;
+    font-family: 'Lato', sans-serif;
+    margin-top: 0.6rem;
+    height: 3.5rem;
+}
+
+.complaintItem input:focus, .complaintItem textarea:focus{
+    outline: #888888 solid 1px;
 }
 
 @media (min-width: 760px){
