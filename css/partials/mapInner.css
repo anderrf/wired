@@ -1,0 +1,14 @@
+.map-popup a{
+    width: 100%;
+}
+
+.map-popup a h3{
+    text-align: center;
+    color: #FFFF1A;
+    font-family: 'Electrolize', sans-serif;
+    font-size: 3rem;
+}
+
+.leaflet-popup-tip-container{
+    display: none;
+}

@@ -6,6 +6,9 @@
     <title>Wired | Mapa</title>
     <link rel="icon" href="./images/logo_128.png">
     <link rel="stylesheet" href="./css/partials/page-map.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 </head>
 <body>
     <div id="page-map">
@@ -23,5 +26,10 @@
     <a href="./createComplaint.html" class="addButton">
         <img src="./images/plus.svg" alt="Adicionar ponto">
     </a>
+    <div class="complaints" hidden>
+        <span data-id="1" data-title="Problema 1" data-lat="-24.093754" data-lng="-46.618384"></span>
+        <span data-id="2" data-title="Problema 2" data-lat="-24.094760" data-lng="-46.619390"></span>
+    </div>
+    <script src="./scripts/page-map.js"></script>
 </body>
 </html>
