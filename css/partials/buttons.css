@@ -101,7 +101,7 @@ a{
 }
 
 /*complaint*/
-.complaintItem > button[type="submit"]{
+.complaintItem > button[type="submit"], #btnCreateComplaint{
     width: 100%;
     color: #333333;
     background-color: #FFFF1A;
@@ -113,7 +113,7 @@ a{
     transition: background 0.5s;
 }
 
-.complaintItem > button[type="submit"]:hover{
+.complaintItem > button[type="submit"]:hover, #btnCreateComplaint:hover{
     background-color: #888888;
 }
 
