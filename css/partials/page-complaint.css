@@ -1,6 +1,7 @@
 @import url(../main.css);
 @import url(./buttons.css);
 @import url(./forms.css);
+@import url(./header.css);
 
 #page-complaint{
     background-color: #FFFFFF;
@@ -17,7 +18,7 @@
     height: 10vh;
     background-color: #333333;
     display: grid;
-    grid-template-columns: 1fr 8fr;
+    grid-template-columns: 1fr 3fr 3fr 1fr;
     align-items: center;
 }
 
@@ -53,6 +54,11 @@
 }
 
 @media (min-width: 760px){
+    #page-complaint header{
+        display: grid;
+        grid-template-columns: 1fr 5fr 3fr 1fr;
+    }
+
     .complaintInfo{
         width: 60%;
     }

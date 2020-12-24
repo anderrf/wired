@@ -1,0 +1,21 @@
+header a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header a img{
+    max-width: 80%;
+}
+
+header p{
+    color: #FFFFFF;
+    font-size: 2rem;
+    text-align: right;
+}
+
+@media (max-width: 759px){
+    .aux{
+        display: none;
+    }
+}

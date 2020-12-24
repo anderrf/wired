@@ -1,5 +1,6 @@
 @import url(../main.css);
 @import url(./buttons.css);
+@import url(./header.css);
 @import url(./mapInner.css);
 
 #page-map{
@@ -12,7 +13,7 @@
     height: 10vh;
     display: grid;
     align-items: center;
-    grid-template-columns: 1fr 3fr 3fr;
+    grid-template-columns: 1fr 3fr 3fr 1fr;
 }
 
 #page-map header h2{
@@ -20,16 +21,6 @@
     font-size: 2.4rem;
     justify-self: start;
     text-align: center;
-}
-
-.account{
-    padding-right: 1rem;
-}
-
-.account a{
-    color: #FFFFFF;
-    font-size: 2rem;
-    text-align: right;
 }
 
 #mapid{
@@ -42,26 +33,16 @@
     #page-map header{
         height: 10vh;
         display: grid;
-        grid-template-columns: 1fr 2fr 3fr 1fr 3fr;
-        grid-template-areas: "back empty city none account";
-    }
-
-    #page-map header > a{
-        grid-area: back;
+        grid-template-columns: 1fr 1fr 3fr 1fr 3fr 1fr;
     }
 
     #page-map header h2{
         font-size: 3.6rem;
-        grid-area: city;
         text-align: center;
         justify-self: center;
     }
 
-    .account{
-        grid-area: account;
-    }
-
-    .account a{
+    #page-map header p{
         font-size: 3rem;
     }
 }
