@@ -3,35 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wired | Problema</title>
+    <title>Wired | Mapa</title>
     <link rel="icon" href="./images/logo_128.png">
-    <link rel="stylesheet" href="./css/partials/page-complaint.css">
+    <link rel="stylesheet" href="./css/partials/page-map.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
     <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 </head>
 <body>
-    <div id="page-complaint">
+    <div id="page-map">
         <header>
-            <a href="./map.html" class="upperBackButton"><img src="./images/arrow_back.svg" alt="Voltar"></a>
-            <div></div>
+            <a href="/" class="upperBackButton"><img src="./images/arrow_back.svg" alt="Voltar"></a>
+            <div class="aux"></div>
+            <h2>Cidade, UF</h2>
+            <div class="aux"></div>
             <p><strong>Nome</strong></p>
             <a href="">
                 <img src="./images/exit.svg" alt="Sair">
             </a>
         </header>
-        <h2>Problema</h2>
-        <div class="complaintInfo">
-            <p>Descrição do problema em questão</p>
-            <div id="mapid"></div>
-            <input type="hidden" name="lat" id="lat">
-            <input type="hidden" name="lng" id="lng">
-            <div class="complaintItem">
-                <button id="btnCreateComplaint" type="submit">Cancelar problema</button>
-            </div>
-        </div>
+        <div id="mapid"></div>
     </div>
-    <span hidden data-id="1" data-title="title" data-lat="-24.093754" data-lng="-46.618384" id="complaintData"></span>
-    <script src="./scripts/page-complaint.js"></script>
+    <a href="./criar-problema" class="addButton">
+        <img src="./images/plus.svg" alt="Adicionar ponto">
+    </a>
+    <div class="complaints" hidden>
+        <span data-id="1" data-title="Problema 1" data-lat="-24.093754" data-lng="-46.618384"></span>
+        <span data-id="2" data-title="Problema 2" data-lat="-24.094760" data-lng="-46.619390"></span>
+    </div>
+    <script src="./scripts/page-map.js"></script>
 </body>
 </html>

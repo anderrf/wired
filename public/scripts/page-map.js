@@ -28,7 +28,7 @@ function addMarker({id, title, lat, lng}){
         minWidth: 240,
         minHeight: 240
     })
-    .setContent(`<a href="./complaint.html?id=${id}"><h3>${title}</h3></a>`);
+    .setContent(`<a href="./problema?id=${id}"><h3>${title}</h3></a>`);
     //.setContent(`${name}<a href="/orphanage?id=${id}" class="choose-orphanage"><img src="/images/arrow-white.svg"></a>`);
 
     //create and add marker
