@@ -1,3 +1,5 @@
+const Database = require('./database/db');
+
 module.exports = {
     index(req, res){
         try{
