@@ -46,5 +46,14 @@ module.exports = {
         catch(error){
             console.log(error);
         }
+    },
+    async createUser(req, res){
+        const fields = req.body;
+        if(Object.values(fields).includes('')){
+            return res.send('Todos os campos devem ser preenchidos!');
+        }
+        if(fields.signupPassword !== fields.signupEqualPassword){
+            return res.send('As senhas digitadas devem ser idênticas!');
+        }
     }
 }
