@@ -21,7 +21,8 @@ server
     .get('/entrar', pages.logon)
     .get('/cadastre-se', pages.signup)
     .get('/problema', pages.complaint)
-    .get('/criar-problema', pages.createComplaint);
+    .get('/criar-problema', pages.createComplaint)
+    .post('/cadastrar-usuario', pages.createUser);
 
 //Determina a porta de execução do servidor
 server.listen(5500);

@@ -1,3 +1,6 @@
+const Database = require('./database/db');
+const saveUser = require('./database/saveUser');
+
 module.exports = {
     index(req, res){
         try{
@@ -45,6 +48,28 @@ module.exports = {
         }
         catch(error){
             console.log(error);
+        }
+    },
+    async createUser(req, res){
+        const fields = req.body;
+        if(Object.values(fields).includes('')){
+            return res.send('Todos os campos devem ser preenchidos!');
+        }
+        if(fields.signupPassword !== fields.signupEqualPassword){
+            return res.send('As senhas digitadas devem ser idênticas!');
+        }
+        try{
+            const db = await Database;
+            await saveUser(db, {
+                signupName: fields.signupName,
+                signupEmail: fields.signupEmail,
+                signupPassword: fields.signupPassword
+            });
+            return res.redirect('/mapa');
+        }
+        catch(error){
+            console.log(error);
+            return res.send("O cadastro de usuário não pôde ser realizado!");
         }
     }
 }
