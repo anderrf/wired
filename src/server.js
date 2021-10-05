@@ -1,10 +1,16 @@
 //Importa dependência do express
 const express = require('express');
 const path = require('path');
+const cookieParser = require('cookie-parser');
+const sessions = require('express-session');
 //Importa as páginas
 const pages  = require('./pages');
 //Executa o express
 const server = express();
+
+//Configurar session
+const time = (1000*60*60*24);
+
 
 //Rotas
 server
