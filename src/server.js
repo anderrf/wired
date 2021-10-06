@@ -21,9 +21,7 @@ server
     .use(express.json())
     .use(express.static(__dirname))
     .use(cookieParser());
-var session;
-const fakeEmail = "teste@teste.com";
-const fakePassword = "testando";
+var session = null;
 
 //Rotas
 server
@@ -35,23 +33,22 @@ server
     .set('views', path.join(__dirname, 'views'))
     .set('view engine', 'hbs')
     //redirecionamento das rotas
-    .get('/', pages.index)
-    .get('/mapa', pages.map)
-    .get('/entrar', pages.logon)
-    .get('/cadastre-se', pages.signup)
-    .get('/problema', pages.complaint)
-    .get('/criar-problema', pages.createComplaint)
-    .post('/cadastrar-usuario', pages.createUser)
+    .get('/', (req, res) => pages.index(req, res, session))
+    .get('/mapa', (req, res) => pages.map(req, res, session))
+    .get('/entrar', (req, res) => pages.logon(req, res, session))
+    .get('/cadastre-se', (req, res) => pages.signup(req, res, session))
+    .get('/problema', (req, res) => pages.complaint(req, res, session))
+    .get('/criar-problema', (req, res) => pages.createComplaint(req, res, session))
+    .post('/cadastrar-usuario', (req, res) => pages.createUser(req, res))
     .post('/usuario-entrar', (req, res) => {
-        if(req.body.logEmail == fakeEmail && req.body.logPassword == fakePassword){
-            session = req.session;
-            session.userId = req.body.logEmail;
-            session.userName = req.body.logEmail;
-            res.redirect('/mapa');
+        session = pages.activateLogon(req, res);
+        if(session.userId){
+            res.redirect('mapa');
         }
-        else{
-            res.send("Usuário ou senha inválidos!");
-        }
+    })
+    .get('/sair', (req, res) => {
+        session = null;
+        res.redirect('/');
     });
 
 //Determina a porta de execução do servidor

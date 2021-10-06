@@ -11,16 +11,28 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 </head>
 <body>
+    <input type="hidden" id="userId" value="{{session.userId}}">
     <div id="page-map">
         <header>
-            <a href="/" class="upperBackButton"><img src="./images/arrow_back.svg" alt="Voltar"></a>
+            {{#if session.userId}}
+                <span style="visibility: hidden;"></span>
+            {{else}}
+                <a href="/" class="upperBackButton">
+                    <img src="./images/arrow_back.svg" alt="Voltar">
+                </a>
+            {{/if}}
             <div class="aux"></div>
             <h2>Cidade, UF</h2>
             <div class="aux"></div>
-            <p><strong>Nome</strong></p>
-            <a href="">
-                <img src="./images/exit.svg" alt="Sair">
-            </a>
+            <p><strong>{{session.userName}}</strong></p>
+            {{#if session.userId}}
+                <a href="/sair">
+                    <img src="./images/exit.svg" alt="Sair">
+                </a>
+            {{else}}
+                <span style="visibility: hidden;"></span>
+            {{/if}}
+            
         </header>
         <div id="mapid"></div>
     </div>
