@@ -101,8 +101,16 @@ a{
 }
 
 /*complaint*/
-.complaintItem > button[type="submit"], #btnCreateComplaint{
+#btnCancelComplaint{
+    padding-top: 1rem;
+}
+
+#btnCreateComplaint, #btnCancelComplaint{
     width: 100%;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     color: #333333;
     background-color: #FFFF1A;
     font-size: 2rem;
@@ -113,7 +121,7 @@ a{
     transition: background 0.5s;
 }
 
-.complaintItem > button[type="submit"]:hover, #btnCreateComplaint:hover{
+#btnCreateComplaint:hover, #btnCancelComplaint:hover{
     background-color: #888888;
 }
 

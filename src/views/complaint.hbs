@@ -31,9 +31,11 @@
             <div id="mapid"></div>
             <input type="hidden" name="lat" id="lat">
             <input type="hidden" name="lng" id="lng">
+            {{#if session.userId}}
             <div class="complaintItem">
-                <button id="btnCreateComplaint" type="submit">Cancelar problema</button>
+                <a href="/" id="btnCancelComplaint">Cancelar problema</a>
             </div>
+            {{/if}}
         </div>
     </div>
     <span hidden data-id="1" data-title="title" data-lat="-24.093754" data-lng="-46.618384" id="complaintData"></span>
