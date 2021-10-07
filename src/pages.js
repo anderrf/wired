@@ -1,53 +1,95 @@
+const session = require('express-session');
 const Database = require('./database/db');
 const saveUser = require('./database/saveUser');
+const searchUserByEmail = require('./database/searchUserByEmail');
 
 module.exports = {
-    index(req, res){
-        try{
-            return res.render('index');
+    index(req, res, session){
+        if(!session){
+            try{
+                return res.render('index');
+            }
+            catch(error){
+                console.log(error);
+            }
         }
-        catch(error){
-            console.log(error);
-        }
-    },
-    map(req, res){
-        try{
-            return res.render('map');
-        }
-        catch(error){
-            console.log(error);
+        else{
+            res.redirect('mapa');
         }
     },
-    logon(req, res){
-        try{
-            return res.render('logon');
+    map(req, res, session){
+        if(session){
+            try{
+                return res.render('map', {session});
+            }
+            catch(error){
+                console.log(error);
+            }
         }
-        catch(error){
-            console.log(error);
-        }
-    },
-    signup(req, res){
-        try{
-            return res.render('signup');
-        }
-        catch(error){
-            console.log(error);
-        }
-    },
-    complaint(req, res){
-        try{
-            return res.render('complaint');
-        }
-        catch(error){
-            console.log(error);
+        else{
+            try{
+                return res.render('map');
+            }
+            catch(error){
+                console.log(error);
+            }
         }
     },
-    createComplaint(req, res){
-        try{
-            return res.render('createComplaint');
+    logon(req, res, session){
+        if(!session){
+            try{
+                return res.render('logon');
+            }
+            catch(error){
+                console.log(error);
+            }
         }
-        catch(error){
-            console.log(error);
+        else{
+            res.redirect('mapa');
+        }
+    },
+    signup(req, res, session){
+        if(!session){
+            try{
+                return res.render('signup');
+            }
+            catch(error){
+                console.log(error);
+            }
+        }
+        else{
+            res.redirect('mapa');
+        }
+    },
+    complaint(req, res, session){
+        if(session){
+            try{
+                return res.render('complaint', {session});
+            }
+            catch(error){
+                console.log(error);
+            }
+        }
+        else{
+            try{
+                return res.render('complaint');
+            }
+            catch(error){
+                console.log(error);
+            }
+        }
+    },
+    createComplaint(req, res, session){
+        if(session){
+            try{
+                return res.render('createComplaint', {session});
+            }
+            catch(error){
+                console.log(error);
+            }
+        }
+        else{
+            res.redirect('entrar');
         }
     },
     async createUser(req, res){
@@ -70,6 +112,30 @@ module.exports = {
         catch(error){
             console.log(error);
             return res.send("O cadastro de usuário não pôde ser realizado!");
+        }
+    },
+    async activateLogon(req, res){
+        const fields = req.body;
+        if(Object.values(fields).includes('')){
+            return res.send("Todos os campos devem ser preenchidos!");
+        }
+        try{
+            const db = await Database;
+            const result = await searchUserByEmail(db, fields.logEmail);
+            const user = result[0];
+            if(user.userEmail == fields.logEmail && user.userPassword == fields.logPassword){
+                let session = req.session;
+                session.userId = user.userId;
+                session.userName = user.userName;
+                return session;
+            }
+            else{
+                res.send("Usuário ou senha inválidos!");
+            }
+        }
+        catch(error){
+            console.log(error);
+            return res.send("Falha ao autenticar usuário!");
         }
     }
 }
