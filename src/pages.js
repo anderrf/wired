@@ -1,5 +1,7 @@
+const session = require('express-session');
 const Database = require('./database/db');
 const saveUser = require('./database/saveUser');
+const searchUserByEmail = require('./database/searchUserByEmail');
 
 module.exports = {
     index(req, res, session){
@@ -112,17 +114,28 @@ module.exports = {
             return res.send("O cadastro de usuário não pôde ser realizado!");
         }
     },
-    activateLogon(req, res){
-        const fakeEmail = "teste@teste.com";
-        const fakePassword = "testando";
-        if(req.body.logEmail == fakeEmail && req.body.logPassword == fakePassword){
-            let session = req.session;
-            session.userId = req.body.logEmail;
-            session.userName = req.body.logEmail;
-            return session;
+    async activateLogon(req, res){
+        const fields = req.body;
+        if(Object.values(fields).includes('')){
+            return res.send("Todos os campos devem ser preenchidos!");
         }
-        else{
-            res.send("Usuário ou senha inválidos!");
+        try{
+            const db = await Database;
+            const result = await searchUserByEmail(db, fields.logEmail);
+            const user = result[0];
+            if(user.userEmail == fields.logEmail && user.userPassword == fields.logPassword){
+                let session = req.session;
+                session.userId = user.userId;
+                session.userName = user.userName;
+                return session;
+            }
+            else{
+                res.send("Usuário ou senha inválidos!");
+            }
+        }
+        catch(error){
+            console.log(error);
+            return res.send("Falha ao autenticar usuário!");
         }
     }
 }

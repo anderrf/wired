@@ -42,8 +42,12 @@ server
     .post('/cadastrar-usuario', (req, res) => pages.createUser(req, res))
     .post('/usuario-entrar', (req, res) => {
         session = pages.activateLogon(req, res);
+        session.then(data => session = data);
         if(session.userId){
             res.redirect('mapa');
+        }
+        else{
+            res.redirect('entrar');
         }
     })
     .get('/sair', (req, res) => {
