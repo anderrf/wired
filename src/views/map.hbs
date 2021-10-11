@@ -40,8 +40,9 @@
         <img src="./images/plus.svg" alt="Adicionar ponto">
     </a>
     <div class="complaints" hidden>
-        <span data-id="1" data-title="Problema 1" data-lat="-24.093754" data-lng="-46.618384"></span>
-        <span data-id="2" data-title="Problema 2" data-lat="-24.094760" data-lng="-46.619390"></span>
+        {{#each complaints}}
+            <span data-id="{{this.complaintId}}" data-title="{{this.complaintTitle}}" data-lat="{{this.complaintLat}}" data-lng="{{this.complaintLng}}"></span>
+        {{/each}}
     </div>
     <script src="./scripts/page-map.js"></script>
 </body>

@@ -1,8 +1,9 @@
 const session = require('express-session');
 const Database = require('./database/db');
-const saveUser = require('./database/saveUser');
-const searchUserByEmail = require('./database/searchUserByEmail');
-const saveComplaint = require('./database/saveComplaint');
+const saveUser = require('./database/queries/saveUser');
+const searchUserByEmail = require('./database/queries/searchUserByEmail');
+const saveComplaint = require('./database/queries/saveComplaint');
+const getComplaints = require('./database/queries/getComplaints');
 
 module.exports = {
     index(req, res, session){
@@ -18,10 +19,12 @@ module.exports = {
             res.redirect('mapa');
         }
     },
-    map(req, res, session){
+    async map(req, res, session){
         if(session){
             try{
-                return res.render('map', {session});
+                const db = await Database;
+                const complaints = await getComplaints(db);
+                return res.render('map', {session, complaints});
             }
             catch(error){
                 console.log(error);
@@ -29,7 +32,9 @@ module.exports = {
         }
         else{
             try{
-                return res.render('map');
+                const db = await Database;
+                const complaints = await getComplaints(db);
+                return res.render('map', {complaints});
             }
             catch(error){
                 console.log(error);
