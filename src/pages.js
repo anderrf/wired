@@ -2,6 +2,7 @@ const session = require('express-session');
 const Database = require('./database/db');
 const saveUser = require('./database/saveUser');
 const searchUserByEmail = require('./database/searchUserByEmail');
+const saveComplaint = require('./database/saveComplaint');
 
 module.exports = {
     index(req, res, session){
@@ -136,6 +137,29 @@ module.exports = {
         catch(error){
             console.log(error);
             return res.send("Falha ao autenticar usuário!");
+        }
+    },
+    async saveComplaint(req, res, session){
+        const fields = req.body;
+        if(Object.values(fields).includes('')){
+            return res.send("Todos os campos devem ser preenchidos!");
+        }
+        try{
+            if(session.userId){
+                const db = await Database;
+                await saveComplaint(db, {
+                    complaintTitle: fields.complaintTitle,
+                    complaintDesc: fields.complaintDesc,
+                    complaintLat: fields.lat,
+                    complaintLng: fields.lng,
+                    creatorId: session.userId
+                });
+                return res.redirect('/mapa');
+            }
+        }
+        catch(error){
+            console.log(error);
+            return res.send("O cadastro de problema não pôde ser realizado!");
         }
     }
 }
