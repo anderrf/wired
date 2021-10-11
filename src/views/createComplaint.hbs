@@ -11,7 +11,6 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 </head>
 <body>
-    <input type="hidden" id="userId" value="{{session.userId}}">
     <div id="page-createComplaint">
         <header>
             <a href="./mapa" class="upperBackButton"><img src="./images/arrow_back.svg" alt="Voltar"></a>
@@ -22,10 +21,10 @@
             </a>
         </header>
         <h2>Informe sobre o seu problema</h2>
-        <form action="" method="GET">
+        <form action="" method="POST" id="createComplaintForm">
             <div class="complaintItem">
                 <label for="complaintTitle">Qual o problema?</label>
-                <input id="complaintTitle" type="text" required maxlength="60">
+                <input name="complaintTitle" id="complaintTitle" type="text" required maxlength="60">
             </div>
             <div class="complaintItem">
                 <label for="complaintDesc">Descrição adicional:</label>
@@ -41,13 +40,13 @@
                 </div>
                 <input type="hidden" name="lat" id="lat">
                 <input type="hidden" name="lng" id="lng">
+                <input type="hidden" name="userId" id="userId" value="{{session.userId}}">
             </div>
             <div class="complaintItem">
                 <button id="btnCreateComplaint" type="button">Registrar problema</button>
             </div>
         </form>
     </div>
-    <span hidden id="latLng" data-lat="" data-lng=""></span>
     <script src="./scripts/page-createComplaint.js"></script>
 </body>
 </html>

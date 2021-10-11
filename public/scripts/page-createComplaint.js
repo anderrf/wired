@@ -6,6 +6,8 @@ var options = {
     maximumAge: 0
 };
 
+var locationLock = false;
+
 function getPosition(){
     let location = [-24.093754, -46.618384];//default location
     if(navigator.geolocation){
@@ -46,14 +48,49 @@ const icon = L.icon({
 let marker;
 
 //create and add marker
-map.on('click', (event)=>{
-    const lat = event.latlng.lat;
-    const lng = event.latlng.lng;
-    document.getElementById('latLng').dataset.lat = lat;
-    document.getElementById('latLng').dataset.lng = lng;
-    //remove icon
-    marker && map.removeLayer(marker);
-    //add icon layer
-    marker = L.marker([lat, lng], {icon})
-        .addTo(map);
+map.on('click', (event) => {
+    setMapMarker(event.latlng.lat, event.latlng.lng)
+});
+
+function setMapMarker(lat, lng){
+    if(!locationLock){
+        setCoords(lat, lng);
+        //remove icon
+        marker && map.removeLayer(marker);
+        //add icon layer
+        marker = L.marker([lat, lng], {icon})
+            .addTo(map);
+    }
+}
+
+//Set lat and lng on form inputs
+
+function setCoords(lat, lng){
+    document.getElementById('lat').value = lat;
+    document.getElementById('lng').value = lng;
+}
+
+document.getElementById('btnGetMapLocation').addEventListener('click', () => {
+    if(!locationLock){
+        locationLock = true;
+    }
+});
+
+document.getElementById('btnGetDeviceLocation').addEventListener('click', () => {
+    if(!locationLock){
+        const latLng = getPosition();
+        setCoords(latLng[0], latLng[1]);
+        setMapMarker(latLng[0], latLng[1]);
+        locationLock = true;
+    }
+});
+
+document.getElementById('createComplaintForm').addEventListener('submit', (ev) => {
+    ev.preventDefault()
+});
+
+document.getElementById('btnCreateComplaint').addEventListener('click', () => {
+    if(locationLock){
+        document.getElementById('createComplaintForm').submit();
+    }
 });
