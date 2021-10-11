@@ -4,6 +4,7 @@ const saveUser = require('./database/queries/saveUser');
 const searchUserByEmail = require('./database/queries/searchUserByEmail');
 const saveComplaint = require('./database/queries/saveComplaint');
 const getComplaints = require('./database/queries/getComplaints');
+const getComplaintById = require('./database/queries/getComplaintById')
 
 module.exports = {
     index(req, res, session){
@@ -67,10 +68,14 @@ module.exports = {
             res.redirect('mapa');
         }
     },
-    complaint(req, res, session){
+    async complaint(req, res, session){
         if(session){
             try{
-                return res.render('complaint', {session});
+                const complaintId = req.query.id;
+                const db = await Database;
+                const complaint = await getComplaintById(db, complaintId);
+                const isCreator = (complaint.creatorId === session.userId);
+                return res.render('complaint', {session, complaint, isCreator});
             }
             catch(error){
                 console.log(error);
@@ -78,7 +83,10 @@ module.exports = {
         }
         else{
             try{
-                return res.render('complaint');
+                const complaintId = req.query.id;
+                const db = await Database;
+                const complaint = await getComplaintById(db, complaintId);
+                return res.render('complaint', {complaint});
             }
             catch(error){
                 console.log(error);

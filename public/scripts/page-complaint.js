@@ -1,30 +1,13 @@
 //create map
 
-var options = {
-    enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 0
+const complaintSpan = document.getElementById('complaintData');
+
+const complaint = {
+    lat: complaintSpan.dataset.lat, 
+    lng: complaintSpan.dataset.lng
 };
 
-function getPosition(){
-    let location = [-24.093754, -46.618384];//default location
-    if(navigator.geolocation){
-        navigator.geolocation.getCurrentPosition((position) => {
-            location = [position.coords.latitude, position.coords.longitude]
-        },
-        (error) => {
-            console.log(error);
-            location = [-24.093754, -46.618384];
-        }, 
-        options);
-    }
-    else{
-        location = [-24.093754, -46.618384];
-    }
-    return location;
-}
-
-const map = L.map('mapid').setView(getPosition(), 20);
+const map = L.map('mapid').setView([complaint.lat, complaint.lng], 20);
 
 //create and add tilelayer
 
@@ -52,9 +35,4 @@ function addMarker({id, title, lat, lng}){
         .addTo(map);
 }
 
-const complaintSpan = document.getElementById('complaintData');
-const complaint = {
-    lat: complaintSpan.dataset.lat, 
-    lng: complaintSpan.dataset.lng
-};
 addMarker(complaint);

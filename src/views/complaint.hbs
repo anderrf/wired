@@ -25,20 +25,20 @@
                 <span style="visibility: hidden;"></span>
             {{/if}}
         </header>
-        <h2>Problema</h2>
+        <h2>{{complaint.complaintTitle}}</h2>
         <div class="complaintInfo">
-            <p>Descrição do problema em questão</p>
+            <p>{{complaint.complaintDesc}}</p>
             <div id="mapid"></div>
             <input type="hidden" name="lat" id="lat">
             <input type="hidden" name="lng" id="lng">
-            {{#if session.userId}}
-            <div class="complaintItem">
-                <a href="/" id="btnCancelComplaint">Cancelar problema</a>
-            </div>
+            {{#if isCreator}}
+                <div class="complaintItem">
+                    <a href="/" id="btnCancelComplaint">Cancelar problema</a>
+                </div>
             {{/if}}
         </div>
     </div>
-    <span hidden data-id="1" data-title="title" data-lat="-24.093754" data-lng="-46.618384" id="complaintData"></span>
+    <span hidden data-id="{{complaint.complaintId}}" data-title="{{complaint.complaintTitle}}" data-lat="{{complaint.complaintLat}}" data-lng="{{complaint.complaintLng}}" id="complaintData"></span>
     <script src="./scripts/page-complaint.js"></script>
 </body>
 </html>
