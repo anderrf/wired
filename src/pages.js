@@ -4,7 +4,8 @@ const saveUser = require('./database/queries/saveUser');
 const searchUserByEmail = require('./database/queries/searchUserByEmail');
 const saveComplaint = require('./database/queries/saveComplaint');
 const getComplaints = require('./database/queries/getComplaints');
-const getComplaintById = require('./database/queries/getComplaintById')
+const getComplaintById = require('./database/queries/getComplaintById');
+const deleteComplaintById = require('./database/queries/deleteComplaintById');
 
 module.exports = {
     index(req, res, session){
@@ -173,6 +174,25 @@ module.exports = {
         catch(error){
             console.log(error);
             return res.send("O cadastro de problema não pôde ser realizado!");
+        }
+    },
+    async deleteComplaint(req, res, session){
+        if(session){
+            try{
+                const db = await Database;
+                const existingId = req.query.id;
+                const existingComplaint = await getComplaintById(db, existingId);
+                if(existingComplaint){
+                    if(existingComplaint.creatorId === session.userId){
+                        await deleteComplaintById(db, existingId);
+                    }
+                }
+                return res.redirect('/mapa');
+            }
+            catch(error){
+                console.log(error);
+                return res.send("O problema não pôde ser deletado!");
+            }
         }
     }
 }
