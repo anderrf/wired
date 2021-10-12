@@ -1,7 +1,11 @@
 const session = require('express-session');
 const Database = require('./database/db');
-const saveUser = require('./database/saveUser');
-const searchUserByEmail = require('./database/searchUserByEmail');
+const saveUser = require('./database/queries/saveUser');
+const searchUserByEmail = require('./database/queries/searchUserByEmail');
+const saveComplaint = require('./database/queries/saveComplaint');
+const getComplaints = require('./database/queries/getComplaints');
+const getComplaintById = require('./database/queries/getComplaintById');
+const deleteComplaintById = require('./database/queries/deleteComplaintById');
 
 module.exports = {
     index(req, res, session){
@@ -17,10 +21,12 @@ module.exports = {
             res.redirect('mapa');
         }
     },
-    map(req, res, session){
+    async map(req, res, session){
         if(session){
             try{
-                return res.render('map', {session});
+                const db = await Database;
+                const complaints = await getComplaints(db);
+                return res.render('map', {session, complaints});
             }
             catch(error){
                 console.log(error);
@@ -28,7 +34,9 @@ module.exports = {
         }
         else{
             try{
-                return res.render('map');
+                const db = await Database;
+                const complaints = await getComplaints(db);
+                return res.render('map', {complaints});
             }
             catch(error){
                 console.log(error);
@@ -61,10 +69,14 @@ module.exports = {
             res.redirect('mapa');
         }
     },
-    complaint(req, res, session){
+    async complaint(req, res, session){
         if(session){
             try{
-                return res.render('complaint', {session});
+                const complaintId = req.query.id;
+                const db = await Database;
+                const complaint = await getComplaintById(db, complaintId);
+                const isCreator = (complaint.creatorId === session.userId);
+                return res.render('complaint', {session, complaint, isCreator});
             }
             catch(error){
                 console.log(error);
@@ -72,7 +84,10 @@ module.exports = {
         }
         else{
             try{
-                return res.render('complaint');
+                const complaintId = req.query.id;
+                const db = await Database;
+                const complaint = await getComplaintById(db, complaintId);
+                return res.render('complaint', {complaint});
             }
             catch(error){
                 console.log(error);
@@ -136,6 +151,48 @@ module.exports = {
         catch(error){
             console.log(error);
             return res.send("Falha ao autenticar usuário!");
+        }
+    },
+    async saveComplaint(req, res, session){
+        const fields = req.body;
+        if(Object.values(fields).includes('')){
+            return res.send("Todos os campos devem ser preenchidos!");
+        }
+        try{
+            if(session.userId){
+                const db = await Database;
+                await saveComplaint(db, {
+                    complaintTitle: fields.complaintTitle,
+                    complaintDesc: fields.complaintDesc,
+                    complaintLat: fields.lat,
+                    complaintLng: fields.lng,
+                    creatorId: session.userId
+                });
+                return res.redirect('/mapa');
+            }
+        }
+        catch(error){
+            console.log(error);
+            return res.send("O cadastro de problema não pôde ser realizado!");
+        }
+    },
+    async deleteComplaint(req, res, session){
+        if(session){
+            try{
+                const db = await Database;
+                const existingId = req.query.id;
+                const existingComplaint = await getComplaintById(db, existingId);
+                if(existingComplaint){
+                    if(existingComplaint.creatorId === session.userId){
+                        await deleteComplaintById(db, existingId);
+                    }
+                }
+                return res.redirect('/mapa');
+            }
+            catch(error){
+                console.log(error);
+                return res.send("O problema não pôde ser deletado!");
+            }
         }
     }
 }

@@ -1,6 +1,13 @@
 //create map
 
-const map = L.map('mapid').setView([-24.093754, -46.618384], 16);
+const complaintSpan = document.getElementById('complaintData');
+
+const complaint = {
+    lat: complaintSpan.dataset.lat, 
+    lng: complaintSpan.dataset.lng
+};
+
+const map = L.map('mapid').setView([complaint.lat, complaint.lng], 20);
 
 //create and add tilelayer
 
@@ -28,9 +35,4 @@ function addMarker({id, title, lat, lng}){
         .addTo(map);
 }
 
-const complaintSpan = document.getElementById('complaintData');
-const complaint = {
-    lat: complaintSpan.dataset.lat, 
-    lng: complaintSpan.dataset.lng
-};
 addMarker(complaint);

@@ -39,7 +39,9 @@ server
     .get('/cadastre-se', (req, res) => pages.signup(req, res, session))
     .get('/problema', (req, res) => pages.complaint(req, res, session))
     .get('/criar-problema', (req, res) => pages.createComplaint(req, res, session))
+    .get('/cancelar-problema', (req, res) => pages.deleteComplaint(req, res, session))
     .post('/cadastrar-usuario', (req, res) => pages.createUser(req, res))
+    .post('/registrar-problema', (req, res) => pages.saveComplaint(req, res, session))
     .post('/usuario-entrar', (req, res) => {
         session = pages.activateLogon(req, res);
         session.then(data => session = data);
