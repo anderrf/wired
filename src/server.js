@@ -22,6 +22,7 @@ server
     .use(express.static(__dirname))
     .use(cookieParser());
 var session = null;
+var logErrorMsg = "";
 
 //Rotas
 server
@@ -34,26 +35,39 @@ server
     .set('view engine', 'hbs')
     //redirecionamento das rotas
     .get('/', (req, res) => pages.index(req, res, session))
-    .get('/mapa', (req, res) => pages.map(req, res, session))
-    .get('/entrar', (req, res) => pages.logon(req, res, session))
+    .get('/mapa', (req, res) => {
+        logErrorMsg = "";
+        pages.map(req, res, session);
+    })
+    .get('/entrar', (req, res) => pages.logon(req, res, session, logErrorMsg))
     .get('/cadastre-se', (req, res) => pages.signup(req, res, session))
     .get('/problema', (req, res) => pages.complaint(req, res, session))
-    .get('/criar-problema', (req, res) => pages.createComplaint(req, res, session))
+    .get('/criar-problema', (req, res) => {
+        logErrorMsg = ""; 
+        pages.createComplaint(req, res, session);
+    })
     .get('/cancelar-problema', (req, res) => pages.deleteComplaint(req, res, session))
     .post('/cadastrar-usuario', (req, res) => pages.createUser(req, res))
     .post('/registrar-problema', (req, res) => pages.saveComplaint(req, res, session))
     .post('/usuario-entrar', (req, res) => {
         session = pages.activateLogon(req, res);
-        session.then(data => session = data);
-        if(session.userId){
-            res.redirect('mapa');
+        logErrorMsg = "";
+        if(session != null){
+            session.then(data => session = data);
+            if(session.userId){
+                logErrorMsg = "";
+                res.redirect('/mapa');
+            }
+            else{
+                logErrorMsg = "Usuário ou senha inválidos!";
+                res.redirect('/entrar');
+            }
         }
-        else{
-            res.redirect('entrar');
-        }
+        
     })
     .get('/sair', (req, res) => {
         session = null;
+        logErrorMsg = "";
         res.redirect('/');
     });
 

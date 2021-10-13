@@ -6,11 +6,12 @@
     <title>Wired | Entrar</title>
     <link rel="icon" href="./images/logo_128.png">
     <link rel="stylesheet" href="./css/partials/page-logon.css">
+    <script src="./scripts/page-logon.js" defer></script>
 </head>
 <body>
     <div id="page-logon">
         <h1>Conecte-se</h1>
-        <form action="usuario-entrar" method="POST">
+        <form action="usuario-entrar" method="POST" id="logonForm" novalidate>
             <div class="logItem">
                 <label for="logEmail">E-mail:</label>
                 <input id="logEmail" name="logEmail" class="logInput" type="email">
@@ -20,7 +21,10 @@
                 <input id="logPassword" name="logPassword" class="logInput" type="password">
             </div>
             <div class="logItem">
-                <button type="submit">Entrar</button>
+                <span class="errorMessage">{{logErrorMsg}}</span>
+            </div>
+            <div class="logItem">
+                <button type="submit" id="btnLogon">Entrar</button>
             </div>
         </form>
         <a href="/" class="logBackButton">

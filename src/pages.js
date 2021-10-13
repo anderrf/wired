@@ -43,10 +43,15 @@ module.exports = {
             }
         }
     },
-    logon(req, res, session){
+    logon(req, res, session, logErrorMsg){
         if(!session){
             try{
-                return res.render('logon');
+                if(logErrorMsg.length > 0){
+                    return res.render('logon', {logErrorMsg});
+                }
+                else{
+                    return res.render('logon');
+                }
             }
             catch(error){
                 console.log(error);
@@ -104,7 +109,7 @@ module.exports = {
             }
         }
         else{
-            res.redirect('entrar');
+            res.redirect('/entrar');
         }
     },
     async createUser(req, res){
@@ -132,21 +137,26 @@ module.exports = {
     async activateLogon(req, res){
         const fields = req.body;
         if(Object.values(fields).includes('')){
-            return res.send("Todos os campos devem ser preenchidos!");
+            return res.send('Todos os devem ser preenchidos!');
         }
         try{
             const db = await Database;
             const result = await searchUserByEmail(db, fields.logEmail);
             const user = result[0];
-            if(user.userEmail == fields.logEmail && user.userPassword == fields.logPassword){
-                let session = req.session;
-                session.userId = user.userId;
-                session.userName = user.userName;
-                return session;
+            let session = req.session;
+            if(user != null && user != undefined){
+                if(user.userEmail == fields.logEmail && user.userPassword == fields.logPassword){
+                    session.userId = user.userId;
+                    session.userName = user.userName;
+                }
+                else{
+                    session = null;
+                }
             }
             else{
-                res.send("Usuário ou senha inválidos!");
+                session = null;
             }
+            return session;
         }
         catch(error){
             console.log(error);

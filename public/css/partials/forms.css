@@ -55,6 +55,12 @@ textarea{
     outline: #888888 solid 1px;
 }
 
+.errorMessage{
+    color: #FFFF1A;
+    display: block;
+    text-align: center;
+}
+
 @media (min-width: 760px){
     .logItem{
         display: flex;
